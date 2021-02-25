@@ -35,10 +35,10 @@ def controlar(comando, lado1):
             distancia = textoToNum(distancia_texto)
     
 
-    if comando == 'cima':
+    if comando in ['cima']:
         pyautogui.press('space') 
         
-    elif comando == 'apertar' or comando == 'pressione' or comando == 'pressionar':
+    elif comando in ['apertar', 'pressione', 'pressionar']:
         start = time.time()
         while time.time() - start < 0.25:
             pyautogui.keyDown('left')
@@ -63,13 +63,13 @@ def controlar(comando, lado1):
             pyautogui.keyUp('right')
             pyautogui.keyUp('space')
 
-    elif comando in['falem', 'fábio', 'fábio', 'falo', 'fale', 'vale','prole','sorri']:
+    elif comando in ['falem', 'fábio', 'falo', 'fale', 'vale', 'prole', 'sorri']:
         pyautogui.press('f')
         
     elif comando == 'baixo':
         x=1
         
-    elif comando == 'esquerda' or comando == 'esquerdo':
+    elif comando in ['esquerda', 'esquerdo']:
         lado = comando
         pyautogui.keyUp('right')
 
@@ -78,7 +78,7 @@ def controlar(comando, lado1):
             pyautogui.keyDown('left')
         pyautogui.keyUp('left')
         
-    elif comando == 'direita' or comando == 'direito':
+    elif comando in ['direita', 'direito']:
         lado = comando
         pyautogui.keyUp('left')
 
@@ -87,8 +87,7 @@ def controlar(comando, lado1):
             pyautogui.keyDown('right')
         pyautogui.keyUp('right')
         
-        
-    elif comando == 'corra' or comando == 'correr':
+    elif comando in ['corra', 'correr']:
         x=1
         
     elif comando in ['virar', 'vire', 'virem', 'vir']:
@@ -98,10 +97,6 @@ def controlar(comando, lado1):
         else:
             lado = 'esquerda'
             pyautogui.press('left')
-    
-    elif comando == 'copiar':
-        pyautogui.hotkey('ctrl', 'c')
-        os.system('play --no-show-progress --null --channels 1 synth %s sine %f' %( 0.1, 400))
         
     elif comando in ['onde', 'ande']:
         if lado in ['esquerda','esquerdo']:
@@ -109,11 +104,11 @@ def controlar(comando, lado1):
         else:
             pyautogui.keyDown('right')
 
-    elif comando == 'pare':
+    elif comando in ['pare']:
         pyautogui.keyUp('right')
         pyautogui.keyUp('left')
     
-    elif comando == 'longo':
+    elif comando in ['longo']:
         if lado in ['esquerda','esquerdo']:
             start = time.time()
             while time.time() - start < 0.5:
