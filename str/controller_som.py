@@ -1,14 +1,8 @@
-from vosk import Model, KaldiRecognizer
-import os
-import pyaudio
-import json
 import pyautogui
 import time
+import winsound
 
-import os
-
-lado_atual = 'direita'
-
+#****************************************************************
 def textoToNum(distancia):
     if distancia == 'dois':
         return 2
@@ -23,7 +17,12 @@ def textoToNum(distancia):
     elif distancia == 'sete':
         return 7
 
+#***************************************************************
 def controlar(comando, lado1):
+    frequency = 2500  # Set Frequency To 2500 Hertz
+    duration = 500  # Set Duration To 1000 ms == 1 second
+    
+
     distancia = 1 #passo da Mae
     comando = comando #comando a seguir
     lado = lado1
@@ -130,35 +129,5 @@ def controlar(comando, lado1):
             pyautogui.keyUp('right')
             pyautogui.keyUp('space')
 
-
+    winsound.Beep(frequency, duration)
     return lado
-
-
-model = Model('model')
-rec = KaldiRecognizer(model, 16000)
-
-p = pyaudio.PyAudio()
-stream = p.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=8000)
-stream.start_stream()
-a = ''
-
-print('******************INICIO**********************\n')
-while True:
-    data = stream.read(8000) #4000
-    
-    '''if len(data) == 0:
-        break'''
-    if rec.AcceptWaveform(data):
-        #a = rec.Result()
-        d = json.loads(rec.Result())['text']
-        #d['text']
-        print(d)
-        lado_atual = controlar(d, lado_atual)
-        
-        if d in  ['encerrado', 'encerrar','encerra','sérra', 'serra']:
-            break
-        #if 
-    #else:
-    #print(rec.PartialResult())
-
-print(rec.FinalResult())
